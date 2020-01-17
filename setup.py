@@ -11,7 +11,7 @@ import codecs
 
 
 
-name = 'django-log-request-id'
+name = 'hungry-django-log-request-id'
 package = 'log_request_id'
 description = 'Django middleware and log filter to attach a unique ID to every log message generated as part of a request'
 url = 'https://github.com/dabapps/django-log-request-id/'
