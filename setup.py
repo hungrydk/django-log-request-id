@@ -18,7 +18,7 @@ url = 'https://github.com/dabapps/django-log-request-id/'
 author = 'DabApps'
 author_email = 'hello@dabapps.com'
 license = 'BSD'
-install_requires = ["django>=1.8"]
+install_requires = []
 
 with codecs.open('README.md', encoding='utf-8') as f:
     readme = f.read()
