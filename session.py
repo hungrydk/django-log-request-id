@@ -2,7 +2,7 @@ from requests import Session as BaseSession
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
-from log_request_id import local, REQUEST_ID_HEADER_SETTING, NO_REQUEST_ID, OUTGOING_REQUEST_ID_HEADER_SETTING
+from . import local, REQUEST_ID_HEADER_SETTING, NO_REQUEST_ID, OUTGOING_REQUEST_ID_HEADER_SETTING
 
 
 class Session(BaseSession):

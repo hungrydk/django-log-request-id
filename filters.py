@@ -1,5 +1,5 @@
 import logging
-from log_request_id import local, NO_REQUEST_ID
+from . import local, NO_REQUEST_ID
 
 
 class RequestIDFilter(logging.Filter):
