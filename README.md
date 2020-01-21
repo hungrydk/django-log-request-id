@@ -1,26 +1,12 @@
 django-log-request-id
 =====================
+**This is a fork of https://github.com/dabapps/django-log-request-id that has been modified to be able to comply with our ancient django 1.2.4 installation**
 
 **Django middleware and log filter to attach a unique ID to every log message generated as part of a request.**
 
 **Author:** Jamie Matthews, [@j4mie](https://twitter.com/j4mie)
 
 [![Build Status](https://travis-ci.org/dabapps/django-log-request-id.png?branch=master)](https://travis-ci.org/dabapps/django-log-request-id)
-
-Example
--------
-
-```
-DEBUG [33031a43fc244539895fef70c433337e] myproject.apps.myapp.views: Doing something in a view
-DEBUG [33031a43fc244539895fef70c433337e] myproject.apps.myapp.forms: The form validated successfully!
-DEBUG [33031a43fc244539895fef70c433337e] myproject.apps.myapp.models: Doing some model magic
-DEBUG [33031a43fc244539895fef70c433337e] myproject.apps.myapp.views: Redirecting to form success page
-```
-
-Why?
-----
-
-So you can grep (or otherwise search) a set of logs for a high-traffic application to isolate all messages associated with a single request.
 
 How?
 ----
@@ -55,49 +41,16 @@ MIDDLEWARE_CLASSES = (
 
 Add the `log_request_id.filters.RequestIDFilter` to your `LOGGING` setting. You'll also need to update your `formatters` to include a format with the new `request_id` variable, add a handler to output the messages (eg to the console), and finally attach the handler to your application's logger.
 
-If none of the above made sense, study [Django's logging documentation](https://docs.djangoproject.com/en/dev/topics/logging/).
-
-An example `LOGGING` setting is below:
+Because of our old Django version, we setup this like so
 
 ```python
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'request_id': {
-            '()': 'log_request_id.filters.RequestIDFilter'
-        }
-    },
-    'formatters': {
-        'standard': {
-            'format': '%(levelname)-8s [%(asctime)s] [%(request_id)s] %(name)s: %(message)s'
-        },
-    },
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'filters': ['request_id'],
-            'formatter': 'standard',
-        },
-    },
-    'loggers': {
-        'myapp': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-    }
-}
+from log_request_id import filters as log_request_id_filters
+    # ...
+    handler.addFilter(log_request_id_filters.RequestIDFilter())
+    # ...
 ```
 
-You can then output log messages as usual:
-
-```python
-import logging
-logger = logging.getLogger(__name__)
-logger.debug("A wild log message appears!")
-```
+# The following documentation is from the original version of this libary, and that configuration syntax is dependent on a newer django version, and needs some rewriting for us to be able to use it in django 1.2.4
 
 If you wish to use an ID provided in a request header, add the following setting:
 
