@@ -28,7 +28,7 @@ your settings.
 Installation and usage
 ----------------------
 
-First, install the package: `pip install django-log-request-id`
+First, install the package: `pip install git+ssh://git@github.com/hungrydk/django-log-request-id.git`
 
 Add the middleware to your `MIDDLEWARE_CLASSES` setting. It should be at the very top.
 
